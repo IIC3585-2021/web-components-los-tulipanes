@@ -11,16 +11,41 @@ const template = document.createElement("template");
 template.innerHTML = `
   <style>
     h3 {
-      color: coral;
+      font-family: 'Courier New', monospace;
+    }
+    h1 {
+      font-family: 'Courier New', monospace;
+    }
+    .todo-button {
+      background-color: #f44336;
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-size: 2rem;
+      font-weight: bold;
+      padding: 0em 1em;
+    }
+
+    .add-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        align-items: end;
     }
   </style>
   <div class="todo-list">
-    <h1>TODO</h1>
+    <h1>Web Components ToDo List</h1>
     <h3></h3>
     <ul id="list-container"></ul>
     <form>
       <input id="todoInput" type="text" />
-      <button id='newTodo'></button>
+      <button class="add-button" id='newTodo'>Ingresar</button>
     </form>
   </div>
 `;
