@@ -1,4 +1,4 @@
-import { html, css, LitElement, property } from 'lit-element';
+import { html, css, LitElement, property, state } from 'lit-element';
 
 export class TodoList extends LitElement {
   static styles = css`
@@ -9,18 +9,39 @@ export class TodoList extends LitElement {
     }
   `;
 
-  @property({ type: String }) title = 'Hey there';
+  @property({ type: [String] }) todos: string[] = [];
+  @property() input: string = '';
 
-  @property({ type: Number }) counter = 5;
+  onClick(e: Event) {
+    e.preventDefault();
+    this.todos.push(this.input);
+    this.input = '';
+  }
 
-  __increment() {
-    this.counter += 1;
+  handleChange(e: { target: { value: string } }) {
+    this.input = e.target.value;
+  }
+
+  removeItem(index: number) {
+    this.todos.splice(index, 1);
+    this.requestUpdate();
   }
 
   render() {
     return html`
-      <h2>${this.title} Nr. ${this.counter}!</h2>
-      <button @click=${this.__increment}>increment</button>
+      <h2>Lit Todo List!</h2>
+      <ul>
+        ${this.todos.map((todo, index) => {
+          return html`<todo-item
+            .title=${todo}
+            .callback=${() => this.removeItem.bind(this)(index)}
+          ></todo-item>`;
+        })}
+      </ul>
+      <form>
+        <input type="text" .value=${this.input} @input=${this.handleChange} />
+        <button @click=${this.onClick}>Ingresar</button>
+      </form>
     `;
   }
 }
