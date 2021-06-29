@@ -3,9 +3,16 @@ import { html, css, LitElement, property, state } from 'lit-element';
 export class TodoList extends LitElement {
   static styles = css`
     :host {
-      display: block;
       padding: 25px;
       color: var(--todo-list-text-color, #000);
+    }
+
+    h1 {
+      font-family: 'Courier New', monospace;
+    }
+
+    ul {
+      width: 80%;
     }
   `;
 
@@ -29,18 +36,26 @@ export class TodoList extends LitElement {
 
   render() {
     return html`
-      <h1 style="font-family: 'Courier New', monospace;">Lit Todo List!</h1>
-      <ul style="padding: 5px;">
-        ${this.todos.map((todo, index) => {
-          return html`<todo-item
-            .title=${todo}
-            .callback=${() => this.removeItem.bind(this)(index)}
-          ></todo-item>`;
-        })}
-      </ul>
+      <h1>Lit Todo List!</h1>
+      <div style="display: flex; justify-content: flex-start;">
+        <ul>
+          ${this.todos.map((todo, index) => {
+            return html`<todo-item
+              .title=${todo}
+              .callback=${() => this.removeItem.bind(this)(index)}
+            ></todo-item>`;
+          })}
+        </ul>
+      </div>
       <form>
-        <input style="padding: 5px; font-size: 16px;" type="text" .value=${this.input} @input=${this.handleChange} />
-        <button style="background-color: #4CAF50;
+        <input
+          style="padding: 5px; font-size: 16px;"
+          type="text"
+          .value=${this.input}
+          @input=${this.handleChange}
+        />
+        <button
+          style="background-color: #4CAF50;
         border: none;
         color: white;
         padding: 10px 20px;
@@ -49,7 +64,10 @@ export class TodoList extends LitElement {
         display: inline-block;
         font-size: 12px;
         align-items: end;"
-        @click=${this.onClick}>Ingresar</button>
+          @click=${this.onClick}
+        >
+          Ingresar
+        </button>
       </form>
     `;
   }
