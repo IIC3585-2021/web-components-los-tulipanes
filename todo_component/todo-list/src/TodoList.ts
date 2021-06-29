@@ -29,8 +29,8 @@ export class TodoList extends LitElement {
 
   render() {
     return html`
-      <h2>Lit Todo List!</h2>
-      <ul>
+      <h1 style="font-family: 'Courier New', monospace;">Lit Todo List!</h1>
+      <ul style="padding: 5px;">
         ${this.todos.map((todo, index) => {
           return html`<todo-item
             .title=${todo}
@@ -39,8 +39,17 @@ export class TodoList extends LitElement {
         })}
       </ul>
       <form>
-        <input type="text" .value=${this.input} @input=${this.handleChange} />
-        <button @click=${this.onClick}>Ingresar</button>
+        <input style="padding: 5px; font-size: 16px;" type="text" .value=${this.input} @input=${this.handleChange} />
+        <button style="background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 12px;
+        align-items: end;"
+        @click=${this.onClick}>Ingresar</button>
       </form>
     `;
   }
