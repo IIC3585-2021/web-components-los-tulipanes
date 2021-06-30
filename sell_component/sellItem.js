@@ -52,7 +52,6 @@ span.dis {
 }
 
 #discount {
-  /* Aca poner el descuento */
   display: inline-block;
   margin: 0 0 0 10px;
   float: right;
@@ -164,7 +163,7 @@ template.innerHTML = /*html*/ `
 </div>
 `;
 
-// CUSTOM ELEMENTS
+// CUSTOM ELEMENTS: Lo definimos como una clase anónima
 window.customElements.define(
   "sell-item",
   class extends HTMLElement {
@@ -172,7 +171,7 @@ window.customElements.define(
       super();
 
       // SHADOW DOM
-      // Atachamos shadow root a sell-item, mode: open permite acceder a el desde el DOM.
+      // Atachamos shadow root a sell-item, mode: open permite acceder al shadow Root.
       this.attachShadow({ mode: "open" });
       // Agregamos nodo el template al shadow root como una copia.
       // Importante que sea una copia para que no haga conflicto si reutilizo el componente.
@@ -190,7 +189,7 @@ window.customElements.define(
     // LifeCycle component
     attributeChangedCallback(name, oldValue, newValue) {
       if (name === "title") {
-        // Cambiamos el contenido del tag con id 'title' en el shadow DOM.
+        // Cambiamos el contenido del tag con id 'title' en el shadow Root.
         this.shadowRoot.querySelector("#title").textContent = newValue;
       } else if (name === "discount") {
         this.shadowRoot.querySelector("#discount").textContent = `-${newValue}%`;
